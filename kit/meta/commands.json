@@ -1,0 +1,7 @@
+{
+  "/os-help": "Open OrbitSmith guides and usage",
+  "/os-skill-find <keyword>": "Find matching skills by name",
+  "/os-workflow": "Open workflow docs and recommended execution path",
+  "/os-guardrails": "Open security/quality guardrails",
+  "/os-merge-status": "Show merge manifest + duplicate report"
+}

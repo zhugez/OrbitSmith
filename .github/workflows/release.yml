@@ -1,0 +1,48 @@
+name: Release (v0.9.1 beta)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_release:
+    name: Build and Release
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact_name: orbitsmith-linux-x86_64
+            extension: ''
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact_name: orbitsmith-windows-x86_64
+            extension: '.exe'
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build Binary
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Rename Binary
+        shell: bash
+        run: |
+          mv target/${{ matrix.target }}/release/orbitsmith${{ matrix.extension }} ${{ matrix.artifact_name }}${{ matrix.extension }}
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ matrix.artifact_name }}${{ matrix.extension }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

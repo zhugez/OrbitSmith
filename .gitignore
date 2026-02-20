@@ -1,0 +1,23 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs/temp
+*.log
+tmp/
+.cache/
+
+# Python/Node
+__pycache__/
+*.pyc
+node_modules/
+
+# Generated reports (rebuild when needed)
+kit/meta/skills-manifest.json
+kit/meta/duplicate-skillmd-groups.json
+kit/meta/semantic-duplicate-candidates.json
+kit/meta/skills-tags-index.json
+target/
+Cargo.lock

@@ -1,0 +1,10 @@
+[package]
+name = "orbitsmith"
+version = "0.9.1-beta"
+edition = "2021"
+description = "OrbitSmith CLI"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }

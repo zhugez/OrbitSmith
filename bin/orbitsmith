@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [ -x "$ROOT_DIR/target/release/orbitsmith" ]; then
+  exec "$ROOT_DIR/target/release/orbitsmith" "$@"
+fi
+
+echo "OrbitSmith Rust binary not built yet. Building now..."
+cargo build --release --manifest-path "$ROOT_DIR/Cargo.toml" >/dev/null
+exec "$ROOT_DIR/target/release/orbitsmith" "$@"

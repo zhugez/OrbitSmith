@@ -1,0 +1,77 @@
+{
+  "total_actions": 12,
+  "actions": [
+    {
+      "skill": "brand-guidelines-anthropic",
+      "action": "keep-canonical",
+      "canonical": "brand-guidelines-anthropic",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "brand-guidelines-community",
+      "action": "redirect-stub",
+      "canonical": "brand-guidelines-anthropic",
+      "archived_to": "kit/skills/_archived_duplicates/brand-guidelines-community"
+    },
+    {
+      "skill": "docx",
+      "action": "keep-canonical",
+      "canonical": "docx",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "docx-official",
+      "action": "redirect-stub",
+      "canonical": "docx",
+      "archived_to": "kit/skills/_archived_duplicates/docx-official"
+    },
+    {
+      "skill": "internal-comms-anthropic",
+      "action": "keep-canonical",
+      "canonical": "internal-comms-anthropic",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "internal-comms-community",
+      "action": "redirect-stub",
+      "canonical": "internal-comms-anthropic",
+      "archived_to": "kit/skills/_archived_duplicates/internal-comms-community"
+    },
+    {
+      "skill": "pdf",
+      "action": "keep-canonical",
+      "canonical": "pdf",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "pdf-official",
+      "action": "redirect-stub",
+      "canonical": "pdf",
+      "archived_to": "kit/skills/_archived_duplicates/pdf-official"
+    },
+    {
+      "skill": "pptx",
+      "action": "keep-canonical",
+      "canonical": "pptx",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "pptx-official",
+      "action": "redirect-stub",
+      "canonical": "pptx",
+      "archived_to": "kit/skills/_archived_duplicates/pptx-official"
+    },
+    {
+      "skill": "xlsx",
+      "action": "keep-canonical",
+      "canonical": "xlsx",
+      "reason": "exact SKILL.md duplicate group"
+    },
+    {
+      "skill": "xlsx-official",
+      "action": "redirect-stub",
+      "canonical": "xlsx",
+      "archived_to": "kit/skills/_archived_duplicates/xlsx-official"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sharp tech grid pattern -->
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1f1f1f" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Deep Black Base -->
+  <rect width="1200" height="320" fill="#09090b"/>
+  <rect width="1200" height="320" fill="url(#grid)"/>
+
+  <!-- Brutalist Architecture: Massive Background Typography Layer -->
+  <!-- This breaks the safe grid and creates extreme Z-axis depth -->
+  <text x="-40" y="290" fill="#18181b" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="320" font-weight="900" letter-spacing="-16" opacity="0.9">ORBITSMITH</text>
+
+  <!-- Asymmetric Red Shards (Right aligned tension) -->
+  <!-- Purposely sharp (0px radius), strictly adhering to the Anti-Safe Harbor rules -->
+  <polygon points="980,0 1200,0 1200,320 820,320" fill="#dc2626"/>
+  <polygon points="930,0 960,0 780,320 750,320" fill="#ef4444"/>
+  
+  <!-- Tech Details inside the shard to give an 'Engine/System' feel -->
+  <path d="M 1050 80 L 1120 80 M 1050 90 L 1090 90" stroke="#fca5a5" stroke-width="4"/>
+  <circle cx="1080" cy="200" r="40" fill="none" stroke="#7f1d1d" stroke-width="4" stroke-dasharray="10 10"/>
+  <circle cx="1080" cy="200" r="14" fill="#7f1d1d"/>
+
+  <!-- Foreground Content: High Contrast -->
+  <text x="80" y="130" fill="#ffffff" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="84" font-weight="800" letter-spacing="-3">OrbitSmith</text>
+  
+  <!-- Brutalist Tag / Label Box -->
+  <rect x="80" y="165" width="220" height="32" fill="#ef4444"/>
+  <text x="96" y="187" fill="#ffffff" font-family="monospace, Consolas, Courier New" font-size="14" font-weight="bold">ANTIGRAVITY_WORKFLOWS</text>
+  
+  <!-- Clear Slogan -->
+  <text x="80" y="240" fill="#d4d4d8" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="500" letter-spacing="-0.5">Install fast. Ship clean. Keep workflows sharp.</text>
+  
+  <!-- Sharp baseline rule breaking symmetry -->
+  <line x1="80" y1="270" x2="460" y2="270" stroke="#3f3f46" stroke-width="2"/>
+  <rect x="460" y="267" width="8" height="8" fill="#ef4444"/>
+</svg>

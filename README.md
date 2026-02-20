@@ -14,26 +14,23 @@
 
 ---
 
-## ⚡ Install
+## ⚡ Install (one-liner)
 
-OrbitSmith provides pre-compiled binaries for **Windows** and **Linux** (v0.9.1 beta).
+Installs OrbitSmith to `~/.orbitsmith/bin/` and **automatically adds it to your PATH**.
 
-### Linux (Ubuntu/Debian)
+### Linux / macOS
 
 ```bash
-curl -LO https://github.com/zhugez/orbitsmith/releases/download/v0.9.1-beta/orbitsmith-linux-x86_64
-chmod +x orbitsmith-linux-x86_64
-sudo mv orbitsmith-linux-x86_64 /usr/local/bin/orbitsmith
-orbitsmith --help
+curl -fsSL https://raw.githubusercontent.com/zhugez/OrbitSmith/master/install/install.sh | bash
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-Invoke-WebRequest -Uri "https://github.com/zhugez/orbitsmith/releases/download/v0.9.1-beta/orbitsmith-windows-x86_64.exe" -OutFile "orbitsmith.exe"
-# Move orbitsmith.exe to a directory in your PATH
-.\orbitsmith.exe --help
+irm https://raw.githubusercontent.com/zhugez/OrbitSmith/master/install/install.ps1 | iex
 ```
+
+> After install, restart your terminal and run `orbitsmith --help` from anywhere! 🚀
 
 ---
 

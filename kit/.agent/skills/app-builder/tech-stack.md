@@ -1,8 +1,8 @@
-# Tech Stack Selection (2026)
+# Tech Stack Selection (2025)
 
 > Default and alternative technology choices for web applications.
 
-## Default Stack (Web App - 2026)
+## Default Stack (Web App - 2025)
 
 ```yaml
 Frontend:

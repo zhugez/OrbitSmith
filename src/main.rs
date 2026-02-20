@@ -28,15 +28,37 @@ enum Commands {
     Update,
 }
 
+fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> {
+    fs::create_dir_all(&dst)?;
+    for entry in fs::read_dir(src)? {
+        let entry = entry?;
+        let ty = entry.file_type()?;
+        if ty.is_dir() {
+            copy_dir_all(entry.path(), dst.as_ref().join(entry.file_name()))?;
+        } else {
+            fs::copy(entry.path(), dst.as_ref().join(entry.file_name()))?;
+        }
+    }
+    Ok(())
+}
+
 fn repo_root() -> Result<PathBuf> {
-    let exe = env::current_exe()?;
-    let bin_dir = exe
-        .parent()
-        .context("Failed to get executable parent directory")?;
-    let root = bin_dir
-        .parent()
-        .context("Failed to get repository root directory")?;
-    Ok(root.to_path_buf())
+    let home_dir = env::var("HOME")
+        .or_else(|_| env::var("USERPROFILE"))
+        .context("Failed to get home directory")?;
+        
+    let global_root = PathBuf::from(home_dir).join(".orbitsmith");
+    
+    if !global_root.join(KIT_SKILLS_PATH).exists() {
+        println!("🚀 OrbitSmith kit not found locally. Cloning global toolkit to {:?}...", global_root);
+        execute_command(Command::new("git").args([
+            "clone",
+            "https://github.com/zhugez/orbitsmith.git",
+            &global_root.to_string_lossy()
+        ]))?;
+    }
+    
+    Ok(global_root)
 }
 
 fn execute_command(cmd: &mut Command) -> Result<()> {
@@ -50,8 +72,10 @@ fn execute_command(cmd: &mut Command) -> Result<()> {
 }
 
 fn is_tool_installed(tool: &str) -> bool {
-    Command::new("sh")
-        .args(["-lc", &format!("command -v {} >/dev/null 2>&1", tool)])
+    Command::new(tool)
+        .arg("--version")
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
         .status()
         .map(|s| s.success())
         .unwrap_or(false)
@@ -73,30 +97,24 @@ fn handle_init(root: &Path) -> Result<()> {
 }
 
 fn handle_sync_skills(root: &Path) -> Result<()> {
-    fs::create_dir_all(SKILLS_DIR).with_context(|| format!("Failed to create {}", SKILLS_DIR))?;
-    execute_command(Command::new("rsync").args([
-        "-a",
-        "--delete",
-        root.join(KIT_SKILLS_PATH).to_string_lossy().as_ref(), // Adding trailing slash like original can be tricky with pathbuf, let's keep it safe.
-        // Actually rsync behavior with trailing slash is important. Let's ensure it.
-        &format!("{}/", root.join(KIT_SKILLS_PATH).to_string_lossy()),
-        &format!("{}/", SKILLS_DIR),
-    ]))?;
-    println!("✅ Skills synced");
+    if Path::new(SKILLS_DIR).exists() {
+        fs::remove_dir_all(SKILLS_DIR).context("Failed to clean older skills directory")?;
+    }
+    
+    let src_path = root.join(KIT_SKILLS_PATH);
+    copy_dir_all(&src_path, SKILLS_DIR)
+        .with_context(|| format!("Failed to copy skills from {:?}", src_path))?;
+        
+    println!("✅ Skills synced recursively without external dependencies");
     Ok(())
 }
 
 fn handle_doctor(root: &Path) -> Result<()> {
     println!("OrbitSmith Doctor");
-
-    for tool in ["git", "rsync"] {
-        let status = if is_tool_installed(tool) {
-            "OK"
-        } else {
-            "MISSING"
-        };
-        println!("- {}: {}", tool, status);
-    }
+    
+    let tool = "git";
+    let status = if is_tool_installed(tool) { "OK" } else { "MISSING" };
+    println!("- {}: {}", tool, status);
 
     let kit_skills_status = if root.join(KIT_SKILLS_PATH).exists() {
         "OK"
